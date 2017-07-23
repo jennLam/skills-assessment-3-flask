@@ -24,7 +24,7 @@ MOST_LOVED_MELONS = {
     },
     'sugb': {
         'img': 'http://www.rareseeds.com/assets/1/14/DimThumbnail/Sugar-Baby-Watermelon-web.jpg',
-        'name': 'Sugar Baby WatermemMlon',
+        'name': 'Sugar Baby Watermelon',
         'num_loves': 587,
     },
     'texb': {
@@ -39,10 +39,10 @@ MOST_LOVED_MELONS = {
 def index():
     """Return homepage."""
 
-    if session["user_name"]:
+    if session.get("user_name"):
         return redirect("/top-melons")
-
-    return render_template("homepage.html")
+    elif not session.get("user_name"):
+        return render_template("homepage.html")
 
 
 @app.route("/get-name", methods=["GET"])
@@ -58,11 +58,21 @@ def get_name():
 def show_top_melons():
     """Displays top melons."""
 
-    if session["user_name"]:
+    if session.get("user_name"):
         return render_template("top-melons.html", melon_dict=MOST_LOVED_MELONS)
-    else:
+    elif not session.get("user_name"):
         return redirect("/")
 
+
+@app.route("/love-melon", methods=["POST"])
+def love_a_melon():
+    """Increases num_loves count for a melon."""
+
+    fav_melon = request.form.get("favmelon")
+
+    MOST_LOVED_MELONS[fav_melon]["num_loves"] = MOST_LOVED_MELONS[fav_melon].get("num_loves") + 1
+    
+    return redirect("/top-melons")
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the

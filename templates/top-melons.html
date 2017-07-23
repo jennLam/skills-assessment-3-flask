@@ -11,13 +11,23 @@
 {% block body %}
 
 <!-- Create a div for every Most Loved Melon using a Jinja for loop -->
-    <h2>Welcome, {{ session["user_name"]}}</h2><br/>
-    {% for melon in melon_dict %}
-    <div class='melon-div'>
-        <h3>{{ session["user_name"]}}, this is a {{ melon_dict[melon]["name"] }}</h3>
-        <h2>Loved {{ melon_dict[melon]["num_loves"] }} times.</h2>
-        <img src='{{ melon_dict[melon]["img"] }}'>
-    </div>
-    {% endfor %}
+  <h2>Welcome, {{ session["user_name"]}}</h2><br/>
+  {% for melon in melon_dict %}
+  <div class='melon-div'>
+      <h3>{{ session["user_name"]}}, this is a {{ melon_dict[melon]["name"] }}</h3>
+      <h2>Loved {{ melon_dict[melon]["num_loves"] }} times.</h2>
+      <img src='{{ melon_dict[melon]["img"] }}'>
+  </div>
+  {% endfor %}
+  <form action="/love-melon" method="POST">
+    Top Melons:
+    <select name="favmelon">
+      {% for melon in melon_dict %}
+      <option value="{{ melon }}">{{ melon_dict[melon]["name"] }}</option>
+      {% endfor %}
+    </select>
+    <input type="submit" value="Submit">
+  </form>
+
 
 {% endblock %}
