@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
 {% block body %}
-
-    <h1>UberMelon's Most Loved Melons</h1><br/>
-    <form action="/get-name">
-      Name: <input type="text" name="my_name"><br/>
-      <input type="submit" value="Submit">
-    </form>
+  <!-- title -->
+  <h1 class="title">UberMelon's Most <span class="love">Loved</span> Melons</h1><br/>
+  <!--   form to let user input name -->
+  <form class="box" action="/get-name" method="GET">
+    <label>Enter your name:</label> <input type="text" name="user_name">
+    <input type="submit" value="Submit">
+  </form>
 
 {% endblock %}

@@ -39,8 +39,10 @@ MOST_LOVED_MELONS = {
 def index():
     """Return homepage."""
 
+    #if user_name is in session, redirects to top-melons route
     if session.get("user_name"):
         return redirect("/top-melons")
+    #otherwise opens view, homepage.html
     elif not session.get("user_name"):
         return render_template("homepage.html")
 
@@ -49,8 +51,11 @@ def index():
 def get_name():
     """Gets user's name and adds to session."""
 
-    name = request.args.get("my_name")
+    #gets name from homepage.html form and sets session key "user_name"
+    #to value of name from from
+    name = request.args.get("user_name")
     session["user_name"] = name
+    #redirects to top-melons route
     return redirect("/top-melons")
 
 
@@ -58,8 +63,11 @@ def get_name():
 def show_top_melons():
     """Displays top melons."""
 
+    #if user_name is in session, opens top-melons.html and passes
+    #MOST_LOVED_MELONS dictionary
     if session.get("user_name"):
         return render_template("top-melons.html", melon_dict=MOST_LOVED_MELONS)
+    #if user_name not in session, redirects to the homepage
     elif not session.get("user_name"):
         return redirect("/")
 
@@ -68,11 +76,12 @@ def show_top_melons():
 def love_a_melon():
     """Increases num_loves count for a melon."""
 
-    fav_melon = request.form.get("favmelon")
-
+    #gets melon value from the fav_melon form
+    fav_melon = request.form.get("fav_melon")
+    #finds that melon and increments the num_loves for that melon
     MOST_LOVED_MELONS[fav_melon]["num_loves"] = MOST_LOVED_MELONS[fav_melon].get("num_loves") + 1
-    
-    return redirect("/top-melons")
+    #opens view, thank-you.html
+    return render_template("thank-you.html")
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the

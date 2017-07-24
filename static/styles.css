@@ -1,10 +1,63 @@
-img {
-    height: 200px;
-    width: 200px;
+/*changes body*/
+body {
+    font-family: sans-serif;
 }
 
+/*changes links*/
+a {
+    text-decoration: none;
+    color: #000000;
+}
+
+/*changes link hover*/
+a:hover {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #CC0000;
+}
+
+/*changes title*/
+.title {
+    padding: 15px;
+    text-align: right;
+    text-transform: uppercase;
+    background-color: #000000;
+    color: #FFFFFF;
+}
+
+/*changes label*/
+label {
+    padding: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/*changes melon div*/
 .melon-div {
     display: inline-block;
     padding: 10px;
     width: 205px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    vertical-align: top;
+}
+
+/*changes images*/
+img {
+    height: 200px;
+    width: 200px;
+    border-radius: 25%;
+    border: 5px dashed;
+}
+
+/*changes melon text*/
+.melon {
+    text-transform: uppercase;
+}
+
+/*changes love text*/
+.love {
+    color: #CC0000;
+    text-decoration: underline;
 }

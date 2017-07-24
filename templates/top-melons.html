@@ -1,33 +1,28 @@
-<!-- <!DOCTYPE html>
-<html>
-<head>
-    <title>Top Melons</title>
-    <link rel="stylesheet" type="text/css" href="/static/styles.css">
-</head>
-<body> -->
-
 {% extends 'base.html' %}
 
 {% block body %}
 
-<!-- Create a div for every Most Loved Melon using a Jinja for loop -->
-  <h2>Welcome, {{ session["user_name"]}}</h2><br/>
-  {% for melon in melon_dict %}
-  <div class='melon-div'>
-      <h3>{{ session["user_name"]}}, this is a {{ melon_dict[melon]["name"] }}</h3>
-      <h2>Loved {{ melon_dict[melon]["num_loves"] }} times.</h2>
-      <img src='{{ melon_dict[melon]["img"] }}'>
-  </div>
-  {% endfor %}
-  <form action="/love-melon" method="POST">
-    Top Melons:
-    <select name="favmelon">
+  <!-- Create a div for every Most Loved Melon using a Jinja for loop -->
+  <h1 class="title">Welcome, {{ session["user_name"]}}!</h1><br/>
+
+  <!-- form to allow user to select their favorite melon -->
+  <form class="box" action="/love-melon" method="POST">
+    <label>Choose your favorite melon <span class="love">&hearts;</span>:</label>
+    <select name="fav_melon">
       {% for melon in melon_dict %}
       <option value="{{ melon }}">{{ melon_dict[melon]["name"] }}</option>
       {% endfor %}
     </select>
-    <input type="submit" value="Submit">
+    <input type="submit" value="LOVE">
   </form>
 
+  <!-- show melon image, the name and how many times loved -->
+  {% for melon in melon_dict %}
+  <div class="melon-div">
+      <h2><span class="love">Loved</span> {{ melon_dict[melon]["num_loves"] }} times.</h2>
+      <img src="{{ melon_dict[melon]["img"] }}">
+      <h4>{{ session["user_name"]}}, this is a <span class="melon">{{ melon_dict[melon]["name"] }}</span></h4>
+  </div>
+  {% endfor %}
 
 {% endblock %}
